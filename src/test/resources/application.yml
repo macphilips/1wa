@@ -1,0 +1,37 @@
+spring:
+  profiles:
+    active: test
+  application:
+    name: one_world_accuracy
+  liquibase:
+    change-log: classpath:liquibase/master.xml
+    contexts: test
+    drop-first: true
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:postgresql://localhost:5432/test_1wa_db
+    username: postgres
+    password: password
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    database: POSTGRESQL
+    open-in-view: false
+    show-sql: false
+    hibernate:
+      # ddl-auto: create-drop
+      naming:
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+    properties:
+      hibernate.jdbc.time_zone: UTC
+
+server:
+  port: 10344
+  address: localhost
+
+application:
+  mail:
+    from: test-challenge@1wa.org
+    reply-to: test-reply-to-challenge@1wa.org
+    baseUrl: http://localhost:8080/api
+    enabled: true

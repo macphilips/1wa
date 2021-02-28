@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Account Deactivated</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="shortcut icon" th:href="@{|${baseUrl}/favicon.ico|}" />
+</head>
+<body>
+<p th:text="|Dear ${user.title} ${user.firstName},|">Dear user,</p>
+<p >
+    Your 1WA account has been deactivated.
+</p>
+<p>
+    <span >Regards, </span>
+    <br/>
+    <em>1WA.</em>
+</p>
+</body>
+</html>

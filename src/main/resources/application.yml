@@ -42,3 +42,11 @@ spring:
       naming:
         physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
         implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+
+application:
+  mail:
+    send-grid-key: api-key
+    from: prod-challenge@1wa.org
+    reply-to: prod-challenge@1wa.org
+    baseUrl: http://localhost:8080/api
+    enabled: true
