@@ -16,3 +16,19 @@ services:
     extends:
       file: postgres.yml
       service: one-world-accuracy
+
+  db_dev:
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: dev_1wa_db
+    extends:
+      file: postgres.yml
+      service: one-world-accuracy
+
+  db_test:
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: test_1wa_db
+    extends:
+      file: postgres.yml
+      service: one-world-accuracy
