@@ -1,4 +1,5 @@
 # One World Accuracy
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/085ac2217b404b05bb0ea128f1740fb3)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=macphilips/1wa&amp;utm_campaign=Badge_Grade)
 
 ## Requirements
 
