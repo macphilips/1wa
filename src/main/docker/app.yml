@@ -4,7 +4,7 @@ services:
     image: 1wa
     environment:
       - _JAVA_OPTIONS=-Xmx512m -Xms256m
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://database:5432/1wa
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://database:5432/db_1wa
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=0908gyvbkjw3456ydfgh9098
     ports:
