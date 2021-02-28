@@ -1,0 +1,11 @@
+version: '2'
+
+services:
+  one-world-accuracy:
+#    image: postgres:11.9-alpine
+    image: postgres:12.3
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: 0908gyvbkjw3456ydfgh9098
+      POSTGRES_DB: db_1wa

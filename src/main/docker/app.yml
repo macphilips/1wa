@@ -1,0 +1,18 @@
+version: '2'
+services:
+  1wa-app:
+    image: 1wa
+    environment:
+      - _JAVA_OPTIONS=-Xmx512m -Xms256m
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://database:5432/1wa
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=0908gyvbkjw3456ydfgh9098
+    ports:
+      - 8080:8080
+    depends_on:
+      - database
+
+  database:
+    extends:
+      file: postgres.yml
+      service: one-world-accuracy

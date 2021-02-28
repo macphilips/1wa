@@ -1,6 +1,7 @@
 plugins {
     id 'org.springframework.boot' version "${spring_boot_version}"
     id 'io.spring.dependency-management' version "${spring_boot_dependency_management}"
+    id 'com.google.cloud.tools.jib' version "${jib_plugin_version}"
     id 'java'
 }
 
@@ -44,6 +45,29 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+// Configure JIB to build docker image of the application
+jib {
+    from {
+        image = "openjdk:8-jre-alpine"
+    }
+    to {
+        image = "${rootProject.name.toLowerCase()}"
+        tags = ["${project.version}".toString(), "latest"]
+    }
+    container {
+        entrypoint = ["./entrypoint.sh"]
+        ports = ["8080"]
+        environment = [
+            SPRING_OUTPUT_ANSI_ENABLED: "ALWAYS",
+        ]
+        creationTime = "USE_CURRENT_TIMESTAMP"
+    }
+    extraDirectories {
+        paths = file("src/main/jib")
+        permissions = ["/entrypoint.sh": "755"]
+    }
 }
 
 defaultTasks "build"
