@@ -1,0 +1,49 @@
+plugins {
+    id 'org.springframework.boot' version "${spring_boot_version}"
+    id 'io.spring.dependency-management' version "${spring_boot_dependency_management}"
+    id 'java'
+}
+
+group = 'org.oneworldaccuracy'
+version = "${app_version}"
+sourceCompatibility = '1.8'
+
+repositories {
+    mavenCentral()
+    gradlePluginPortal()
+}
+
+dependencies {
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    annotationProcessor 'org.projectlombok:lombok:1.18.12'
+
+    compile 'com.vladmihalcea:hibernate-types-52:2.3.4'
+    compile "org.hibernate.validator:hibernate-validator"
+    compile 'org.passay:passay:1.4.0'
+    compile "org.springframework.boot:spring-boot-starter-thymeleaf"
+    compile 'com.sendgrid:sendgrid-java:4.1.2'
+
+    compileOnly 'org.projectlombok:lombok:1.18.12'
+
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+    implementation "org.apache.commons:commons-lang3"
+    implementation 'org.liquibase:liquibase-core'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    runtimeOnly 'org.postgresql:postgresql'
+
+    testCompileOnly 'org.projectlombok:lombok:1.18.12'
+    testImplementation "com.h2database:h2"
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.12'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+defaultTasks "build"
