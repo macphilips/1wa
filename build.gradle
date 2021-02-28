@@ -2,6 +2,7 @@ plugins {
     id 'org.springframework.boot' version "${spring_boot_version}"
     id 'io.spring.dependency-management' version "${spring_boot_dependency_management}"
     id 'com.google.cloud.tools.jib' version "${jib_plugin_version}"
+    id 'jacoco'
     id 'java'
 }
 
@@ -68,6 +69,18 @@ jib {
         paths = file("src/main/jib")
         permissions = ["/entrypoint.sh": "755"]
     }
+}
+
+test {
+    finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        html.enabled false
+    }
+    dependsOn test
 }
 
 defaultTasks "build"
