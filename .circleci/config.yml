@@ -1,0 +1,42 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/openjdk:8-jdk
+
+      - image: circleci/postgres:9.6.9-alpine
+        auth:
+          username: macphilips
+          password: $DOCKERHUB_PASSWORD
+        environment:
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: test_1wa_db
+
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "build.gradle" }}
+            - v1-dependencies-
+      - run:
+          name: Print Java Version
+          command: 'java -version'
+      - run:
+          name: list directory
+          command: 'ls'
+      - run:
+          name: Give Executable Power
+          command: 'chmod +x gradlew'
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: v1-dependencies-{{ checksum "build.gradle" }}
+      - run:
+          name: Verify with Prod Profile
+          command: 'gradle bootJar --no-daemon'
+      - run:
+          name: Run Backend Tests
+          command: 'gradle clean test --no-daemon'
+      - run:
+          name: Send coverage
+          command: 'bash <(curl -Ls https://coverage.codacy.com/get.sh) report'
