@@ -139,3 +139,4 @@ Desktop.ini
 ######################
 .eslintcache
 /HELP.md
+/src/main/resources/application-local.yml

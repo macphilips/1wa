@@ -5,7 +5,7 @@ logging:
 
 spring:
   application:
-    name: one_world_accuracy
+    name: one-world-accuracy
   profiles:
     active: #spring.profiles.active#
   liquibase:
@@ -42,3 +42,11 @@ spring:
       naming:
         physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
         implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+
+application:
+  mail:
+    send-grid-key: ${SENDGRID_API_KEY}
+    from:  ${FROM_EMAIL}
+    reply-to: ${REPLY_TO_EMAIL}
+    baseUrl:  ${BASE_URL}
+    enabled: false
