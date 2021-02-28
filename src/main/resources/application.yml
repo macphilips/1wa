@@ -8,6 +8,9 @@ spring:
     name: one_world_accuracy
   profiles:
     active: #spring.profiles.active#
+  liquibase:
+    change-log: classpath:liquibase/master.xml
+    contexts: prod
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:postgresql://localhost:5432/db_1wa

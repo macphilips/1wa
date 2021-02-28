@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <include file="liquibase/changelog/20210227050600_add_entity_User.xml" relativeToChangelogFile="false"/>
+    <include file="liquibase/changelog/20210227050600_add_entity_Authority.xml" relativeToChangelogFile="false"/>
+    <include file="liquibase/changelog/20210227050600_add_entity_UserAuthority.xml" relativeToChangelogFile="false"/>
+    <include file="liquibase/changelog/20210227050600_add_user_authority_constraint.xml" relativeToChangelogFile="false"/>
+    <include file="liquibase/changelog/20210227050600_load_data_Authority.xml" relativeToChangelogFile="false"/>
+
+    <include file="liquibase/changelog/20210227050600_add_entity_DateTimeWrapper.xml" relativeToChangelogFile="false" context="test"/>
+
+</databaseChangeLog>
