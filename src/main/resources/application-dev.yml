@@ -4,6 +4,8 @@ logging:
     org.oneworldaccuracy.demo: DEBUG
 
 spring:
+  liquibase:
+    contexts: dev
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:postgresql://localhost:5432/dev_1wa_db
