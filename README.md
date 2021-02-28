@@ -3,9 +3,9 @@
 
 ## Requirements
 
-- [Java 8+](https://www.oracle.com/java/technologies/javase-downloads.html)
-- [Postgres](https://www.postgresql.org/docs/9.4/static/tutorial-install.html)
-- [Docker](https://www.docker.com/get-started) (optional)
+-  [Java 8+](https://www.oracle.com/java/technologies/javase-downloads.html)
+-  [Postgres](https://www.postgresql.org/docs/9.4/static/tutorial-install.html)
+-  [Docker](https://www.docker.com/get-started) (optional)
 
 ## Development
 
@@ -13,13 +13,13 @@ This application was developed using Spring boot for backend and PostgreSQL for 
 
 ### Setup
 
-1. Install [Java 8+](https://www.oracle.com/java/technologies/javase-downloads.html)
-2. Install [Postgres](https://www.postgresql.org/docs/9.4/static/tutorial-install.html)
+1.  Install [Java 8+](https://www.oracle.com/java/technologies/javase-downloads.html)
+2.  Install [Postgres](https://www.postgresql.org/docs/9.4/static/tutorial-install.html)
 
 Clone this repo
 
 ```shell script
-$ git clone https://github.com/<username>/1wa.git
+$ git clone https://github.com/macphilips/1wa.git
 $ cd 1wa
 ```
 
@@ -38,6 +38,14 @@ You can update the datasource settings in `src/main/resources/application.yml`.
 ```shell script
 $ ./gradlew bootRun
 ```
+
+To enable sending emails to the users, replace the following placeholder variables in `src/main/resources/application.yml` with the appropriate values.
+
+-  `${SENDGRID_API_KEY}`
+-  `${FROM_EMAIL}`
+-  `${REPLY_TO_EMAIL}`
+-  `${BASE_URL}`
+
 
 ### Running with Docker
 
@@ -70,3 +78,6 @@ or
 ```shell script
 $ make stop
 ```
+
+### Database Schema
+![Codacy Badge](schema.png)
