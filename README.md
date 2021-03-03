@@ -1,11 +1,12 @@
 # One World Accuracy
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/085ac2217b404b05bb0ea128f1740fb3)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=macphilips/1wa&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Coverage/085ac2217b404b05bb0ea128f1740fb3)](https://www.codacy.com/gh/macphilips/1wa/dashboard?utm_source=github.com&utm_medium=referral&utm_content=macphilips/1wa&utm_campaign=Badge_Coverage)
 
 ## Requirements
 
--  [Java 8+](https://www.oracle.com/java/technologies/javase-downloads.html)
--  [Postgres](https://www.postgresql.org/docs/9.4/static/tutorial-install.html)
--  [Docker](https://www.docker.com/get-started) (optional)
+-   [Java 8+](https://www.oracle.com/java/technologies/javase-downloads.html)
+-   [Postgres](https://www.postgresql.org/docs/9.4/static/tutorial-install.html)
+-   [Docker](https://www.docker.com/get-started) (optional)
 
 ## Development
 
@@ -41,10 +42,10 @@ $ ./gradlew bootRun
 
 To enable sending emails to the users, replace the following placeholder variables in `src/main/resources/application.yml` with the appropriate values.
 
--  `${SENDGRID_API_KEY}`
--  `${FROM_EMAIL}`
--  `${REPLY_TO_EMAIL}`
--  `${BASE_URL}`
+-   `${SENDGRID_API_KEY}`
+-   `${FROM_EMAIL}`
+-   `${REPLY_TO_EMAIL}`
+-   `${BASE_URL}`
 
 You can obtain SendGrid API key by signing up [here](https://signup.sendgrid.com/) and creating a new API key in the [settings](https://app.sendgrid.com/settings/api_keys) page
 
@@ -84,12 +85,12 @@ $ make stop
 ![Database Schema](schema.png)
 
 For the database schema, we have defined three models
--  User: this model holds all the information about the user, e.g. firstName, email, e.t.c. and a user has a many-2-many relationship with the Authority model
--  Authority: this model holds information about the available roles on the platform
--  UserAuthority: this model ties user to many roles and vice visa.
+-   User: this model holds all the information about the user, e.g. firstName, email, e.t.c. and a user has a many-2-many relationship with the Authority model
+-   Authority: this model holds information about the available roles on the platform
+-   UserAuthority: this model ties user to many roles and vice visa.
 
 ### Documentation
 Added a postman collection that documents all the endpoints and makes it easy to call the API locally.
 
--  [Download](https://www.postman.com/downloads/) and install
--  Import the [postman collection](1wa.postman_collection.json)
+-   [Download](https://www.postman.com/downloads/) and install
+-   Import the [postman collection](1wa.postman_collection.json)
