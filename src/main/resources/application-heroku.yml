@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: one-world-accuracy
+  profiles:
+    active: heroku
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: ${JDBC_DATABASE_URL}
+    username: ${JDBC_DATABASE_USERNAME}
+    password: ${JDBC_DATABASE_PASSWORD}
+
+
+application:
+  mail:
+    send-grid-key: ${SENDGRID_API_KEY}
+    from:  ${FROM_EMAIL}
+    reply-to: ${REPLY_TO_EMAIL}
+    baseUrl:  ${BASE_URL}
+    enabled: ${ENABLE_SEND_GRID}

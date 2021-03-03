@@ -85,3 +85,5 @@ jacocoTestReport {
 }
 
 defaultTasks "build"
+
+task stage(dependsOn: ['bootJar'])
