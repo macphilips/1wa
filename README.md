@@ -94,3 +94,5 @@ Added a postman collection that documents all the endpoints and makes it easy to
 
 -   [Download](https://www.postman.com/downloads/) and install
 -   Import the [postman collection](1wa.postman_collection.json)
+
+For Swagger documentation [click here](https://onewa.herokuapp.com/swagger-ui.html)
