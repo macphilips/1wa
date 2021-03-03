@@ -380,4 +380,13 @@ class UserCrtlTest {
         restUserMockMvc.perform(get("/api/user/activate/{key}", "activationKey"))
             .andExpect(status().isBadRequest());
     }
+
+    @Test
+    public void shouldAssertThatEndpointFetchAllAuthorities() throws Exception {
+        restUserMockMvc.perform(get("/api/users/authorities")
+            .accept(APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(APPLICATION_JSON_VALUE))
+            .andExpect(jsonPath("$.[*]").value(hasItems(USER, ADMIN)));
+    }
 }

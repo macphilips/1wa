@@ -21,6 +21,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
+import static java.util.stream.Collectors.toSet;
 import static org.oneworldaccuracy.demo.domain.UserStatus.DEACTIVATED;
 import static org.oneworldaccuracy.demo.domain.UserStatus.REGISTERED;
 import static org.oneworldaccuracy.demo.domain.UserStatus.VERIFIED;
@@ -142,5 +143,13 @@ public class UserService {
                 log.debug("Activated user: {}", user);
                 return user;
             });
+    }
+
+    @Transactional(readOnly = true)
+    public Set<String> getAuthorities() {
+        return authorityRepository.findAll()
+            .stream()
+            .map(Authority::getName)
+            .collect(toSet());
     }
 }

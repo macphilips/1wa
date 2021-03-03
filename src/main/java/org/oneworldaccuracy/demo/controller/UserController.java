@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.Optional;
+import java.util.Set;
 
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.NO_CONTENT;
@@ -114,10 +115,10 @@ public class UserController {
     }
 
     /**
-     * {@code GET  /activate/:key} : activate the registered user.
+     * {@code GET  /user/activate/:key} : activate the registered user.
      *
      * @param key the activation key.
-     * @throws RuntimeException {@code 400 (Internal Server Error)} if the user couldn't be activated.
+     * @throws RuntimeException {@code 500 (Internal Server Error)} if the user couldn't be activated.
      */
     @GetMapping("/user/activate/{key}")
     public void activateAccount(@PathVariable String key) {
@@ -126,5 +127,14 @@ public class UserController {
             throw new BadRequestException("No user was found for this activation key");
         }
         mailService.sendOnboardingEmail(user.get());
+    }
+    /**
+     * {@code GET  /users/authorities : activate the registered user.
+     *
+     * @return {@link Set<String>} of available authorities on the platform
+     */
+    @GetMapping("/users/authorities")
+    public Set<String> getAuthorities() {
+        return userService.getAuthorities();
     }
 }
