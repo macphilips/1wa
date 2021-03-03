@@ -32,12 +32,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/user",
-					"protocol": "http",
+					"raw": "https://onewa.herokuapp.com/api/user",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"onewa",
+						"herokuapp",
+						"com"
 					],
-					"port": "8080",
 					"path": [
 						"api",
 						"user"
@@ -52,12 +53,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/user/activate/{{activationKey}}",
+					"raw": "http://onewa.herokuapp.com/api/user/activate/{{activationKey}}",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"onewa",
+						"herokuapp",
+						"com"
 					],
-					"port": "8080",
 					"path": [
 						"api",
 						"user",
@@ -74,12 +76,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/user/{{userId}}",
+					"raw": "http://onewa.herokuapp.com/api/user/{{userId}}",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"onewa",
+						"herokuapp",
+						"com"
 					],
-					"port": "8080",
 					"path": [
 						"api",
 						"user",
@@ -104,12 +107,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/user/{{userId}}",
+					"raw": "http://onewa.herokuapp.com/api/user/{{userId}}",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"onewa",
+						"herokuapp",
+						"com"
 					],
-					"port": "8080",
 					"path": [
 						"api",
 						"user",
@@ -136,12 +140,13 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/user/{{userId}}",
+					"raw": "http://onewa.herokuapp.com/api/user/{{userId}}",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"onewa",
+						"herokuapp",
+						"com"
 					],
-					"port": "8080",
 					"path": [
 						"api",
 						"user",
@@ -157,12 +162,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/users",
+					"raw": "http://onewa.herokuapp.com/api/users",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"onewa",
+						"herokuapp",
+						"com"
 					],
-					"port": "8080",
 					"path": [
 						"api",
 						"users"
