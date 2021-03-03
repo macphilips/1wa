@@ -37,6 +37,8 @@ public class UserDTO {
 
     private String title;
 
+    private String activationKey;
+
     private boolean verified = false;
 
     private Instant registeredDate = null;
@@ -64,5 +66,8 @@ public class UserDTO {
         if (user.getAuthorities() != null) {
             this.authorities = user.getAuthorities().stream().map(Authority::getName).collect(toSet());
         }
+
+        // Only exposing this field just to make postman testing easy
+        this.activationKey = user.getActivationKey();
     }
 }
