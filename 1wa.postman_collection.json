@@ -176,6 +176,28 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Get All Authorities",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://onewa.herokuapp.com/api/users/authorities",
+					"protocol": "http",
+					"host": [
+						"onewa",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"users",
+						"authorities"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
