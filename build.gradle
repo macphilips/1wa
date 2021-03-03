@@ -22,7 +22,6 @@ dependencies {
     compile 'com.vladmihalcea:hibernate-types-52:2.3.4'
     compile "org.hibernate.validator:hibernate-validator"
     compile 'org.passay:passay:1.4.0'
-    compile "org.springframework.boot:spring-boot-starter-thymeleaf"
     compile 'com.sendgrid:sendgrid-java:4.1.2'
 
     compileOnly 'org.projectlombok:lombok:1.18.12'
@@ -32,7 +31,12 @@ dependencies {
     implementation "org.apache.commons:commons-lang3"
     implementation 'org.liquibase:liquibase-core'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation "org.springframework.boot:spring-boot-starter-thymeleaf"
     implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    implementation 'io.springfox:springfox-boot-starter:3.0.0'
+    implementation 'io.springfox:springfox-swagger-ui:2.9.2'
+    implementation 'io.springfox:springfox-bean-validators:3.0.0'
 
     runtimeOnly 'org.postgresql:postgresql'
 
@@ -62,7 +66,7 @@ jib {
         ports = ["8080"]
         environment = [
             SPRING_OUTPUT_ANSI_ENABLED: "ALWAYS",
-            SPRING_PROFILES_ACTIVE: project.getProperties().getOrDefault("springProfiles","")
+            SPRING_PROFILES_ACTIVE    : project.getProperties().getOrDefault("springProfiles", "")
         ]
         creationTime = "USE_CURRENT_TIMESTAMP"
     }
