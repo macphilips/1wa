@@ -83,6 +83,11 @@ $ make stop
 ### Database Schema
 ![Database Schema](schema.png)
 
+For the database schema, we have defined three models
+-  User: this model holds all the information about the user, e.g. firstName, email, e.t.c. and a user has a many-2-many relationship with the Authority model
+-  Authority: this model holds information about the available roles on the platform
+-  UserAuthority: this model ties user to many roles and vice visa.
+
 ### Documentation
 Added a postman collection that documents all the endpoints and makes it easy to call the API locally.
 
