@@ -189,7 +189,7 @@ class UserCrtlTest {
             .content(TestUtil.convertObjectToJsonBytes(registerUser)))
             .andExpect(status().isBadRequest())
             .andExpect(content().contentType(APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.detail").value("Invalid authority INVALID_ROLE"));
+            .andExpect(jsonPath("$.detail").value("Invalid authority INVALID_ROLE, you can see the list of allowed authority by doing: GET /users/authorities"));
 
         List<User> userList = userRepository.findAll();
         assertThat(userList).hasSize(databaseSizeBeforeCreate);

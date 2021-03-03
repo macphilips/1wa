@@ -69,7 +69,7 @@ public class UserService {
         if (userDTO.getAuthorities() != null) {
             userDTO.getAuthorities().stream()
                 .map(authority -> authorityRepository.findById(authority)
-                    .orElseThrow(() -> new BadRequestException(String.format("Invalid authority %s", authority)))
+                    .orElseThrow(() -> new BadRequestException(String.format("Invalid authority %s, you can see the list of allowed authority by doing: GET /users/authorities", authority)))
                 ).forEach(authorities::add);
         } else {
             authorityRepository.findById(USER).ifPresent(authorities::add);
@@ -102,7 +102,7 @@ public class UserService {
             Set<Authority> authorities = new HashSet<>();
             userDTO.getAuthorities().stream()
                 .map(authority -> authorityRepository.findById(authority)
-                    .orElseThrow(() -> new BadRequestException(String.format("Invalid authority %s", authority)))
+                    .orElseThrow(() -> new BadRequestException(String.format("Invalid authority %s, you can see the list of allowed authority by doing: GET /users/authorities", authority)))
                 ).forEach(authorities::add);
             // clear previous role and update with the new one
             user.getAuthorities().clear();
