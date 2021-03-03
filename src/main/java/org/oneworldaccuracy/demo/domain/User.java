@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Formula;
 
@@ -47,6 +48,7 @@ public class User implements Serializable {
     private Long id;
 
     @JsonIgnore
+    @ToString.Exclude
     @NotNull
     @Size(min = 60, max = 60)
     @Column(name = "password_hash", length = 60, nullable = false)
@@ -79,11 +81,13 @@ public class User implements Serializable {
     @Size(max = 20)
     @Column(name = "activation_key", length = 20)
     @JsonIgnore
+    @ToString.Exclude
     private String activationKey;
 
     @Size(max = 20)
     @Column(name = "reset_key", length = 20)
     @JsonIgnore
+    @ToString.Exclude
     private String resetKey;
 
     @Column(name = "registered_date")
@@ -103,6 +107,7 @@ public class User implements Serializable {
     private UserStatus status;
 
     @JsonIgnore
+    @ToString.Exclude
     @ManyToMany
     @JoinTable(
         name = "user_authority",
@@ -129,5 +134,4 @@ public class User implements Serializable {
     public int hashCode() {
         return Objects.hashCode(getId());
     }
-
 }
