@@ -1,5 +1,6 @@
 package org.oneworldaccuracy.demo.service.dto;
 
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -12,6 +13,7 @@ import org.oneworldaccuracy.demo.validator.ValidPassword;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
+@ApiModel(value = "ManagedUser")
 public class UserRegistrationDTO extends UserDTO {
     public static final int PASSWORD_MIN_LENGTH = 4;
     public static final int PASSWORD_MAX_LENGTH = 100;

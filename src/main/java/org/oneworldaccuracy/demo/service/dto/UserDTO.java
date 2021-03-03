@@ -1,5 +1,6 @@
 package org.oneworldaccuracy.demo.service.dto;
 
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.oneworldaccuracy.demo.domain.Authority;
@@ -20,6 +21,7 @@ import static java.util.stream.Collectors.toSet;
 
 @Data // This annotation helps us generate boilerplate get/set/hash/equal/toString methods
 @NoArgsConstructor // Generates a constructor with no arguments
+@ApiModel(value = "User")
 public class UserDTO {
     private static final String emailRegex = "^(([^<>()\\[\\]\\\\.,;:\\s@\"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@\"]+)*)|(\".+\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
 
