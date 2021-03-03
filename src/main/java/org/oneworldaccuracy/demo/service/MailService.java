@@ -60,9 +60,14 @@ public class MailService {
 
     @Async
     public void sendDeactivationEmail(User user) {
-        System.out.println("Sending activation email to ====");
         log.debug("Sending activation email to '{}'", user.getEmail());
         sendEmailFromTemplate(user, "mail/deactivateUser", "Account Deactivated");
+    }
+
+    @Async
+    public void sendOnboardingEmail(User user) {
+        log.debug("Sending activation email to '{}'", user.getEmail());
+        sendEmailFromTemplate(user, "mail/onBoardingEmail", "Onboarding");
     }
 
     @Async

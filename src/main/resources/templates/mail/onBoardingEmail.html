@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>1WA Onboarding</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="shortcut icon" th:href="@{|${baseUrl}/favicon.ico|}"/>
+</head>
+<body>
+<p th:text="|Dear ${user.title} ${user.firstName},|">Dear user,</p>
+<p>This is an onboarding email</p>
+<p>
+    <span>Regards, </span>
+    <br/>
+    <em>1WA. Team</em>
+</p>
+</body>
+</html>

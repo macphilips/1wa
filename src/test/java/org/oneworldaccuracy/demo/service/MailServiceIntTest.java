@@ -124,6 +124,28 @@ public class MailServiceIntTest {
     }
 
     @Test
+    public void testSendOnboardingEmail() throws Exception {
+        User user = new User();
+        user.setTitle("Mr");
+        user.setFirstName("John");
+        user.setEmail("john.doe@example.com");
+        mailService.sendOnboardingEmail(user);
+        verify(sendGrid).api(messageCaptor.capture());
+        Request message = messageCaptor.getValue();
+        ReadContext ctx = JsonPath.parse(message.getBody());
+        assertThat(ctx.read("$.from.email", String.class)).isEqualTo("test-challenge@1wa.org");
+        assertThat(ctx.read("$.reply_to.email", String.class)).isEqualTo("test-reply-to-challenge@1wa.org");
+        assertThat(ctx.read("$.personalizations[0].to[0].email", String.class)).isEqualTo("john.doe@example.com");
+        assertThat(ctx.read("$.subject", String.class)).isEqualTo("Onboarding");
+        assertThat(ctx.read("$.content[0].type", String.class)).isEqualTo("text/html");
+
+        String emailBody = ctx.read("$.content[0].value", String.class);
+        assertThat(emailBody).contains("<title>1WA Onboarding</title>");
+        assertThat(emailBody).contains("Dear Mr John,");
+        assertThat(emailBody).contains("This is an onboarding email");
+    }
+
+    @Test
     public void shouldSendDeactivatedEmail() throws Exception {
         User user = new User();
         user.setTitle("Mr");

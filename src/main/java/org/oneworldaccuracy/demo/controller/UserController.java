@@ -125,5 +125,6 @@ public class UserController {
         if (!user.isPresent()) {
             throw new BadRequestException("No user was found for this activation key");
         }
+        mailService.sendOnboardingEmail(user.get());
     }
 }
