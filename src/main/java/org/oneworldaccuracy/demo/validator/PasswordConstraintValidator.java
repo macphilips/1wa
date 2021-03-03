@@ -20,10 +20,6 @@ import java.util.List;
 import static java.lang.String.join;
 
 public class PasswordConstraintValidator implements ConstraintValidator<ValidPassword, String> {
-    @Override
-    public void initialize(final ValidPassword arg0) {
-    }
-
     public static CharacterRule[] getRules() {
         CharacterData lowerCaseChars = EnglishCharacterData.LowerCase;
         CharacterRule lowerCaseRule = new CharacterRule(lowerCaseChars);
@@ -67,5 +63,4 @@ public class PasswordConstraintValidator implements ConstraintValidator<ValidPas
         context.buildConstraintViolationWithTemplate(join(",", validator.getMessages(result))).addConstraintViolation();
         return false;
     }
-
 }
