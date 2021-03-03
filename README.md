@@ -46,6 +46,7 @@ To enable sending emails to the users, replace the following placeholder variabl
 -  `${REPLY_TO_EMAIL}`
 -  `${BASE_URL}`
 
+You can obtain SendGrid API key by signing up [here](https://signup.sendgrid.com/) and creating a new API key in the [settings](https://app.sendgrid.com/settings/api_keys) page
 
 ### Running with Docker
 
@@ -80,4 +81,10 @@ $ make stop
 ```
 
 ### Database Schema
-![Codacy Badge](schema.png)
+![Database Schema](schema.png)
+
+### Documentation
+Added a postman collection that documents all the endpoints and makes it easy to call the API locally.
+
+-  [Download](https://www.postman.com/downloads/) and install
+-  Import the [postman collection](1wa.postman_collection.json)
