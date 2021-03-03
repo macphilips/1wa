@@ -2,6 +2,7 @@ package org.oneworldaccuracy.demo.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.oneworldaccuracy.demo.controller.errors.BadRequestException;
 import org.oneworldaccuracy.demo.controller.errors.EmailAlreadyUsedException;
 import org.oneworldaccuracy.demo.controller.errors.NotFoundException;
 import org.oneworldaccuracy.demo.domain.Authority;
@@ -64,7 +65,15 @@ public class UserService {
 
         // new user gets registration key
         Set<Authority> authorities = new HashSet<>();
-        authorityRepository.findById(USER).ifPresent(authorities::add);
+        if (userDTO.getAuthorities() != null) {
+            userDTO.getAuthorities().stream()
+                .map(authority -> authorityRepository.findById(authority)
+                    .orElseThrow(() -> new BadRequestException(String.format("Invalid authority %s", authority)))
+                ).forEach(authorities::add);
+        } else {
+            authorityRepository.findById(USER).ifPresent(authorities::add);
+        }
+
         newUser.setAuthorities(authorities);
 
         userRepository.save(newUser);
@@ -88,6 +97,16 @@ public class UserService {
         if (Objects.nonNull(userDTO.getLastName())) user.setLastName(userDTO.getLastName());
         if (Objects.nonNull(userDTO.getEmail())) user.setEmail(userDTO.getEmail());
         if (Objects.nonNull(userDTO.getTitle())) user.setTitle(userDTO.getTitle());
+        if (Objects.nonNull(userDTO.getAuthorities())) {
+            Set<Authority> authorities = new HashSet<>();
+            userDTO.getAuthorities().stream()
+                .map(authority -> authorityRepository.findById(authority)
+                    .orElseThrow(() -> new BadRequestException(String.format("Invalid authority %s", authority)))
+                ).forEach(authorities::add);
+            // clear previous role and update with the new one
+            user.getAuthorities().clear();
+            user.getAuthorities().addAll(authorities);
+        }
 
         return new UserDTO(userRepository.save(user));
     }

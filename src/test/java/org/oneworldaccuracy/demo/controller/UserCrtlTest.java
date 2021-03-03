@@ -4,6 +4,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.oneworldaccuracy.demo.DemoApplication;
+import org.oneworldaccuracy.demo.domain.Authority;
 import org.oneworldaccuracy.demo.domain.User;
 import org.oneworldaccuracy.demo.domain.UserStatus;
 import org.oneworldaccuracy.demo.repository.UserRepository;
@@ -14,12 +15,18 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.hasItems;
+import static org.hamcrest.Matchers.hasSize;
+import static org.oneworldaccuracy.demo.service.AuthoritiesConstants.ADMIN;
+import static org.oneworldaccuracy.demo.service.AuthoritiesConstants.USER;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
@@ -66,6 +73,7 @@ class UserCrtlTest {
             .email(DEFAULT_EMAIL)
             .title(DEFAULT_TITLE)
             .status(DEFAULT_STATUS)
+            .authorities(new HashSet<>(Collections.singletonList(new Authority(USER))))
             .verified(true)
             .password(RandomStringUtils.random(60))
             .build();
@@ -111,6 +119,10 @@ class UserCrtlTest {
         registerUser.setLastName(DEFAULT_LASTNAME);
         registerUser.setEmail(DEFAULT_EMAIL);
         registerUser.setPassword(DEFAULT_PASSWORD);
+        HashSet<String> authorities = new HashSet<>();
+        authorities.add(USER);
+        authorities.add(ADMIN);
+        registerUser.setAuthorities(authorities);
 
         restUserMockMvc.perform(post("/api/user")
             .contentType(APPLICATION_JSON)
@@ -122,10 +134,65 @@ class UserCrtlTest {
             .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL))
             .andExpect(jsonPath("$.status").value(UserStatus.REGISTERED.toString()))
             .andExpect(jsonPath("$.verified").value(false))
+            .andExpect(jsonPath("$.authorities").value(hasItems(USER, ADMIN)))
             .andExpect(jsonPath("$.title").value(DEFAULT_TITLE));
 
         List<User> userList = userRepository.findAll();
         assertThat(userList).hasSize(databaseSizeBeforeCreate + 1);
+    }
+
+    @Test
+    public void shouldAssertThatEndpointRegistersUserWithoutAuthorityDefaultsToRole_User() throws Exception {
+        int databaseSizeBeforeCreate = userRepository.findAll().size();
+        // should create a new user
+        UserRegistrationDTO registerUser = new UserRegistrationDTO();
+        registerUser.setTitle(DEFAULT_TITLE);
+        registerUser.setFirstName(DEFAULT_FIRSTNAME);
+        registerUser.setLastName(DEFAULT_LASTNAME);
+        registerUser.setEmail(DEFAULT_EMAIL);
+        registerUser.setPassword(DEFAULT_PASSWORD);
+
+        restUserMockMvc.perform(post("/api/user")
+            .contentType(APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(registerUser)))
+            .andExpect(status().isCreated())
+            .andExpect(content().contentType(APPLICATION_JSON_VALUE))
+            .andExpect(jsonPath("$.firstName").value(DEFAULT_FIRSTNAME))
+            .andExpect(jsonPath("$.lastName").value(DEFAULT_LASTNAME))
+            .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL))
+            .andExpect(jsonPath("$.status").value(UserStatus.REGISTERED.toString()))
+            .andExpect(jsonPath("$.verified").value(false))
+            .andExpect(jsonPath("$.authorities").value(hasItems(USER)))
+            .andExpect(jsonPath("$.title").value(DEFAULT_TITLE));
+
+        List<User> userList = userRepository.findAll();
+        assertThat(userList).hasSize(databaseSizeBeforeCreate + 1);
+    }
+
+    @Test
+    public void shouldFailWithBadRequestErrorWhenRegisterEndpointReceivesInvalidRoleOrAuthority() throws Exception {
+        int databaseSizeBeforeCreate = userRepository.findAll().size();
+        // should create a new user
+        UserRegistrationDTO registerUser = new UserRegistrationDTO();
+        registerUser.setTitle(DEFAULT_TITLE);
+        registerUser.setFirstName(DEFAULT_FIRSTNAME);
+        registerUser.setLastName(DEFAULT_LASTNAME);
+        registerUser.setEmail(DEFAULT_EMAIL);
+        registerUser.setPassword(DEFAULT_PASSWORD);
+        HashSet<String> authorities = new HashSet<>();
+        authorities.add(USER);
+        authorities.add("INVALID_ROLE");
+        registerUser.setAuthorities(authorities);
+
+        restUserMockMvc.perform(post("/api/user")
+            .contentType(APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(registerUser)))
+            .andExpect(status().isBadRequest())
+            .andExpect(content().contentType(APPLICATION_JSON_VALUE))
+            .andExpect(jsonPath("$.detail").value("Invalid authority INVALID_ROLE"));
+
+        List<User> userList = userRepository.findAll();
+        assertThat(userList).hasSize(databaseSizeBeforeCreate);
     }
 
     @Test
@@ -187,6 +254,10 @@ class UserCrtlTest {
         updateUser.setPassword(UPDATED_PASSWORD);
         updateUser.setVerified(false);
 
+        HashSet<String> authorities = new HashSet<>();
+        authorities.add(ADMIN);
+        updateUser.setAuthorities(authorities);
+
         restUserMockMvc.perform(put("/api/user/{id}", user.getId())
             .contentType(APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(updateUser)))
@@ -197,8 +268,9 @@ class UserCrtlTest {
             .andExpect(jsonPath("$.email").value(UPDATED_EMAIL))
             .andExpect(jsonPath("$.status").value(UserStatus.REGISTERED.toString()))
             .andExpect(jsonPath("$.verified").value(true))
+            .andExpect(jsonPath("$.authorities").value(hasSize(1)))
+            .andExpect(jsonPath("$.authorities").value(hasItem(ADMIN)))
             .andExpect(jsonPath("$.title").value(UPDATED_TITLE));
-
     }
 
     @Test
