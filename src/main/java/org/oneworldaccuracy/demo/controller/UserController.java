@@ -1,5 +1,6 @@
 package org.oneworldaccuracy.demo.controller;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
@@ -40,7 +41,7 @@ import static org.springframework.http.HttpStatus.OK;
  */
 @RestController
 @RequestMapping("/api")
-@ApiOperation(tags = "User", value = "User")
+@Api(tags = "User", value = "User")
 public class UserController {
     private final UserService userService;
     private final MailService mailService;
